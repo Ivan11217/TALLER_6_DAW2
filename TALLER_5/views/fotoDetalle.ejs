@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title><%= title %></title>
+  <style>
+    body {
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+      margin: 0;
+      font-family: Arial, sans-serif;
+    }
+
+    header, footer {
+      background-color: #333;
+      color: white;
+      text-align: center;
+      padding: 1em;
+      width: 100%;
+    }
+
+    main {
+      flex: 1;
+      display: flex;
+      width: 100%;
+    }
+
+    nav {
+      width: 200px;
+      background-color: #f4f4f4;
+      padding: 1em;
+      box-shadow: 2px 0 5px rgba(0,0,0,0.1);
+    }
+
+    .content {
+      flex: 1;
+      padding: 2em;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      box-sizing: border-box;
+    }
+
+    .foto-details {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      border: 1px solid #ccc;
+      padding: 20px;
+      border-radius: 10px;
+      background-color: #f9f9f9;
+      width: 100%;
+      max-width: 600px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      box-sizing: border-box;
+    }
+
+    .foto-details img {
+      max-width: 100%;
+      height: auto;
+    }
+
+    .etiquetas {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      margin-top: 10px;
+    }
+
+    .etiquetas span {
+      background-color: #e0e0e0;
+      border-radius: 5px;
+      padding: 5px 10px;
+      margin: 5px;
+    }
+
+    button {
+      margin-top: 20px;
+      padding: 10px 20px;
+      border: none;
+      background-color: #007BFF;
+      color: white;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #0056b3;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Mi Aplicación</h1>
+  </header>
+  <main>
+    <nav>
+      <ul>
+        <li><a href="/">Inicio</a></li>
+        <li><a href="/fotos">Fotos</a></li>
+        <li><a href="/about">Acerca de</a></li>
+      </ul>
+    </nav>
+    <div class="content">
+      <div class="foto-details">
+        <h1>Detalle foto</h1>
+        <p><%= foto.descripcion %></p>
+        <p><strong>Calificación:</strong> <%= foto.calificacion %></p>
+        <img src="/<%= foto.ruta %>" alt="<%= foto.titulo %>">
+        <h2>Etiquetas</h2>
+        <div class="etiquetas">
+          <% foto.etiqueta.forEach(function(etiqueta) { %>
+            <span><%= etiqueta.texto %></span>
+          <% }); %>
+        </div>
+        <button onclick="window.location.href='/'">Cerrar</button>
+      </div>
+    </div>
+  </main>
+  <footer>
+    <p>Mi Aplicación &copy; 2024</p>
+  </footer>
+</body>
+</html>

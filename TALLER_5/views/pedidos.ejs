@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Pedidos</title>
+  <link rel="stylesheet" href="/bootstrap/css/bootstrap.min.css">
+  <link rel="stylesheet" href="/datatables/datatables.min.css">
+</head>
+<body>
+  <div class="container">
+    <h1>Pedidos</h1>
+    <form action="/pedidos/create" method="POST">
+      <div class="mb-3">
+        <label for="fecha" class="form-label">Fecha</label>
+        <input type="date" class="form-control" id="fecha" name="fecha" required>
+      </div>
+      <div class="mb-3">
+        <label for="idcliente" class="form-label">ID Cliente</label>
+        <input type="number" class="form-control" id="idcliente" name="idcliente" required>
+      </div>
+      <div class="mb-3">
+        <label for="estado" class="form-label">Estado</label>
+        <input type="text" class="form-control" id="estado" name="estado" required>
+      </div>
+      <div class="mb-3">
+        <label for="productos" class="form-label">Productos</label>
+        <textarea class="form-control" id="productos" name="productos" required></textarea>
+        <small>Formato: [{"idprod": 1, "cantidad": 2, "precio": 10.5}, ...]</small>
+      </div>
+      <button type="submit" class="btn btn-primary">Crear Pedido</button>
+    </form>
+    <hr>
+    <table id="pedidosTable" class="table table-striped">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Fecha</th>
+          <th>Cliente</th>
+          <th>Estado</th>
+          <th>Productos</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% pedidos.forEach(pedido => { %>
+        <tr>
+          <td><%= pedido.id %></td>
+          <td><%= pedido.fecha %></td>
+          <td><%= pedido.Cliente.nombre %> <%= pedido.Cliente.apellido %></td>
+          <td><%= pedido.estado %></td>
+          <td>
+            <% pedido.Productos.forEach(producto => { %>
+              <p><%= producto.descrip %>: <%= producto.ProdxPedido.cantidad %> x <%= producto.ProdxPedido.precio %></p>
+            <% }) %>
+          </td>
+        </tr>
+        <% }) %>
+      </tbody>
+    </table>
+  </div>
+  <script src="/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="/datatables/datatables.min.js"></script>
+  <script>
+    $(document).ready(function() {
+      $('#pedidosTable').DataTable();
+    });
+  </script>
+</body>
+</html>
